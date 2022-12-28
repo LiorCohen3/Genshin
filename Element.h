@@ -2,7 +2,8 @@
 
 enum Element
 {
-	Anemo = 1,
+	None_Element = 0,
+	Anemo,
 	Pyro,
 	Cyro,
 	Hydro,

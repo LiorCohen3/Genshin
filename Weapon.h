@@ -2,7 +2,8 @@
 
 enum Weapon
 {
-	Sword = 1,
+	None_weapon =0,
+	Sword,
 	Polearm,
 	Catalyst,
 	Claymore,
