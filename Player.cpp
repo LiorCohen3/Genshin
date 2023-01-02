@@ -38,42 +38,41 @@ Player::~Player()
 	delete[] m_data_characters;
 }
 /*-------------------------------------------------------------------------------*/
-void Player::print_data_characters()
+void Player::PrintDataCharacters()
 {
 	for (int i = 0; i < m_curr_num_of_characters; i++)
 	{
-		cout << "Character Number  " << i+1 << endl;
+		cout << "|||||||Character " << i + 1 << "|||||||" << endl;
 		cout << "Name: " << m_data_characters[i].getName() << endl;
 		cout << "Locaton: " << m_data_characters[i].getLocation() << endl;
 		cout << "Element Type: " << m_data_characters[i].getType() << endl;
 		cout << "Weapon Type: " << m_data_characters[i].getWeapon() << endl;
-		cout << "Equipped Weapon: " << m_data_characters[i].getequipped_weapon() << endl;
+		cout << "Equipped Weapon: " << m_data_characters[i].getEquippedWeapon() << endl;
 		cout << "Stars: " << m_data_characters[i].getStars() << endl;
-		cout << "Name: " << m_data_characters[i].getName() << endl;
 		cout << endl;
 	} 
 }
 /*-------------------------------------------------------------------------------*/
-void Player::print_active_characters()
+void Player::PrintActiveCharacters(ostream& out = cout) const
 {
 	for (int i = 0; i < MAX_ACTIVE_CHARACTERS; i++)
 	{
-		cout << "Active Character Number  " << i+1 << endl;
+		out << "Active Character Number  " << i+1 << endl;
 		if (m_active_characters[i] != NULL)
 		{
-			cout << "Name: " << m_active_characters[i]->getName() << endl;
-			cout << "Locaton: " << m_active_characters[i]->getLocation() << endl;
-			cout << "Element Type: " << m_active_characters[i]->getType() << endl;
-			cout << "Weapon Type: " << m_active_characters[i]->getWeapon() << endl;
-			cout << "Equipped Weapon: " << m_active_characters[i]->getequipped_weapon() << endl;
-			cout << "Stars: " << m_active_characters[i]->getStars() << endl;
-			cout << "Name: " << m_active_characters[i]->getName() << endl;
-			cout << endl;
-		}else cout << "Empty" << endl;
+			out << "Name: " << m_active_characters[i]->getName() << endl;
+			out << "Locaton: " << m_active_characters[i]->getLocation() << endl;
+			out << "Element Type: " << m_active_characters[i]->getType() << endl;
+			out << "Weapon Type: " << m_active_characters[i]->getWeapon() << endl;
+			out << "Equipped Weapon: " << m_active_characters[i]->getEquippedWeapon() << endl;
+			out << "Stars: " << m_active_characters[i]->getStars() << endl;
+			out << "Name: " << m_active_characters[i]->getName() << endl;
+			out << endl;
+		}else out << "Empty" << endl;
 	} 
 }
 /*-------------------------------------------------------------------------------*/
-void Player::add_character_to_data(Character character)
+void Player::AddCharacterToData(Character character)
 {
 	if (m_curr_num_of_characters != m_max_num_of_characters)
 	{
@@ -84,35 +83,31 @@ void Player::add_character_to_data(Character character)
 		string		location			= character.getLocation();
 		Element		type				= character.getType();
 		Weapon		weapon_type			= character.getWeapon();
-		string		equipped_weapon		= character.getequipped_weapon();
+		string		equipped_weapon		= character.getEquippedWeapon();
 		int			stars				= character.getStars();
 
 		if (stars == 4)
 		{
-			EpicCharacter new_character_E(name, location, type, weapon_type, equipped_weapon);
-			m_data_characters[m_curr_num_of_characters] = new_character_E;
-			m_curr_num_of_characters++;
+			m_data_characters[m_curr_num_of_characters] = EpicCharacter(name, location, type, weapon_type, equipped_weapon);
 		}
 
-		string signatur_weapon;
+		string signature_weapon;
 
 		if (stars == 5)
 		{
 			cout << "This character is legendary, please enter signatue weapon: ";
-			cin >> signatur_weapon;
-			LegendaryCharacter new_character_L(name, location, type, weapon_type, equipped_weapon, signatur_weapon);
-			m_data_characters[m_curr_num_of_characters] = new_character_L;
-			m_curr_num_of_characters++;
+			cin >> signature_weapon;
+			m_data_characters[m_curr_num_of_characters] = LegendaryCharacter(name, location, type, weapon_type, equipped_weapon, signature_weapon);
 		}
-
+		m_curr_num_of_characters++;
 		cout << "Character added successfully" << endl;
 	}
 	else cout << "Couldn't add character, You have reached the maximum number of characters" << endl;
 }
 /*-------------------------------------------------------------------------------*/
-void Player::edit_active_team()
+void Player::EditActiveTeam()
 {
-	print_data_characters();
+	PrintDataCharacters();
 	int sel1;
 	do
 	{
@@ -122,7 +117,7 @@ void Player::edit_active_team()
 	sel1 = sel1 -1;
 
 
-	print_active_characters();
+	PrintActiveCharacters();
 	int sel2;
 	do
 	{
@@ -136,3 +131,9 @@ void Player::edit_active_team()
 	cout << "Character added to active characters successfully" << endl;
 }
 /*-------------------------------------------------------------------------------*/
+
+ostream& operator << (ostream& out, Player& player)
+{
+	player.PrintActiveCharacters(out);
+	return out;
+}

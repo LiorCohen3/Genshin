@@ -10,7 +10,6 @@ public:
 	Character();	
 	Character(string name, string location, Element type, Weapon weapon_type, string equipped_weapon, int stars);
 	Character& operator = (const Character& character);
-
 	virtual ~Character() {};
 	virtual int Attack();
 	int EditWeapon(string weapon);
@@ -19,7 +18,7 @@ public:
 	string getLocation(){return m_location;}
 	Element getType(){return m_type;}
 	Weapon getWeapon(){return m_weapon_type;}
-	string getequipped_weapon(){return m_equipped_weapon;}
+	string getEquippedWeapon(){return m_equipped_weapon;}
 	int getStars() {return m_stars;}
 
 protected:

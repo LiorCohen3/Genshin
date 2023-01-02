@@ -8,12 +8,12 @@ class Player
 public:
 	Player(string name);
 	~Player();
-	void add_character_to_data(Character character);
-	void edit_weapon();
-	void edit_active_team();
-	void evaluate_team();
-	void print_data_characters();
-	void print_active_characters();
+	void AddCharacterToData(Character character);
+	void EditWeapons();
+	void EditActiveTeam();
+	void EvaluateTeam();
+	void PrintDataCharacters();
+	void PrintActiveCharacters(ostream& out = cout) const;
 
 private:
 	string		m_name;
@@ -22,3 +22,5 @@ private:
 	int			m_curr_num_of_characters;
 	int			m_max_num_of_characters;
 };
+
+ostream& operator << (ostream& out, Player& player);
