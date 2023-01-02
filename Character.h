@@ -13,6 +13,7 @@ public:
 	virtual ~Character() {};
 	virtual int Attack();
 	int EditWeapon(string weapon);
+	void ChangeWeapon(Weapon weapon){m_weapon_type = weapon;}
 	
 	string getName(){return m_name;}
 	string getLocation(){return m_location;}

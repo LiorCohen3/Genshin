@@ -14,11 +14,12 @@ public:
 	void EvaluateTeam();
 	void PrintDataCharacters();
 	void PrintActiveCharacters(ostream& out = cout) const;
-
+	void PrintWeapons();
+	
 private:
 	string		m_name;
 	Character**	m_active_characters;
-	Character*  m_data_characters;
+	Character**  m_data_characters;
 	int			m_curr_num_of_characters;
 	int			m_max_num_of_characters;
 };
