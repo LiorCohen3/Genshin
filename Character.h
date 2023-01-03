@@ -11,10 +11,9 @@ public:
 	Character(string name, string location, Element type, Weapon weapon_type, string equipped_weapon, int stars);
 	Character& operator = (const Character& character);
 	virtual ~Character() {};
-	virtual int Attack();
-	int EditWeapon(string weapon);
-	void ChangeWeapon(Weapon weapon){m_weapon_type = weapon;}
-	
+	virtual void Attack();
+	void SetWeaponType(Weapon weapon){m_weapon_type = weapon;}
+	void SetWeaponName(string name) { m_equipped_weapon = name; }
 	string getName(){return m_name;}
 	string getLocation(){return m_location;}
 	Element getType(){return m_type;}
